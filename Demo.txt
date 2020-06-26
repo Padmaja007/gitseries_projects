@@ -1,0 +1,539 @@
+//===========================================================================================
+// 
+//
+// TITLE      :To Implement Binary Tree & perform recursive & non-recursive traversals on it.
+//              
+//              
+//                
+//===========================================================================================
+
+
+
+import java.io.*;
+import java.util.*;
+
+ class Node {
+	
+	Node left,right,ptr;
+	int data;
+	public Node(int d)
+	{
+		left=null;
+		right=null;
+		data=d;
+	}
+
+}
+
+ 
+
+ class BinaryTree
+ {
+	 Scanner sc=new Scanner(System.in);
+	 private Node root;
+	 Node temp,ptr;
+	 public BinaryTree()
+	 {
+      root=null;
+	 }
+	 
+	 
+	 void create()
+	 {
+		 int flag=0;
+		System.out.println("Enter the value for node : ");
+		int data=sc.nextInt();
+		temp=new Node(data);
+	 if(root==null)
+	 {
+	  root=temp;
+	  flag=1;
+	 }
+	 
+	 else
+	 {
+		ptr=root;
+		while(flag==0)
+		{ 
+			int dir;
+			System.out.println(ptr.data);
+			System.out.println("Enter the direction for creating the tree.Enter '1' for LEFT & '0' for RIGHT");
+			dir=sc.nextInt();
+			if(dir==1)
+			{
+			if(ptr.left==null)
+			{ 
+				ptr.left=temp;
+				flag=1;
+				
+			}
+			else
+			{
+				ptr=ptr.left;
+			}
+			}
+			else if(dir==0)
+			{
+				if(ptr.right==null)
+				{
+					
+					ptr.right=temp;
+					flag=1;
+				}
+				else
+				{
+					ptr=ptr.right;
+				}	
+		
+			}
+		}
+	 }
+ 
+ }
+	 void inorderrec(Node root)
+	 {
+		 if(root!=null)
+		 {
+			 inorderrec(root.left);
+			 System.out.print(root.data+"  ");
+			 inorderrec(root.right);
+		 }
+	 }
+	 
+	 void inorder1()
+	 {
+		 inorderrec(root);
+	 }
+	 
+	 void prederrec(Node root)
+	 {
+		 if(root!=null)
+		 {
+			
+			 System.out.print(root.data+"  ");
+			 prederrec(root.left);
+			 prederrec(root.right);
+		 }
+	 }
+	 
+	 void preorder1()
+	 {
+		 prederrec(root);
+	 }
+	 
+	 void postderrec(Node root)
+	 {
+		 if(root!=null)
+		 {
+			 postderrec(root.left);
+			 postderrec(root.right);
+			 System.out.print(root.data+"  ");
+		 }
+	 }
+	 
+	 void postorder1()
+	 {
+		 postderrec(root);
+	 }
+	 
+	 void inorder()
+	 {
+		Stack<Node> s=new Stack<Node>();
+		ptr=root;
+		while(true)
+		{
+			while(ptr!=null)
+			{
+				s.push(ptr);
+				ptr=ptr.left;
+				
+			}
+			if(s.empty()==true)
+			{
+				return;
+			}
+			else
+			{
+				ptr=s.pop();
+				System.out.print(ptr.data+"  ");
+				ptr=ptr.right;
+			}
+		}
+		
+	 }
+	 
+	 void preorder()
+	 {
+		 Stack<Node> s=new Stack<Node>();
+			ptr=root;
+			while(true)
+			{
+				while(ptr!=null)
+				{
+					System.out.print(ptr.data+"  ");
+					s.push(ptr);
+					ptr=ptr.left;
+					
+				}
+				if(s.empty()==true)
+				{
+					return;
+				}
+				else
+				{
+					ptr=s.pop();
+					ptr=ptr.right;
+				}
+			} 
+	 }
+	 
+	 void postorder()
+	 {
+		 String flag;
+		 Stack<Node> s=new Stack<Node>();
+		 Stack<String> s1=new Stack<String>();
+		 ptr=root;
+		 while(true)
+		 {
+		 while(ptr!=null)
+		 {
+			 s.push(ptr);
+			 s1.push("L");
+			 ptr=ptr.left;
+		 }
+		 if(s.isEmpty()==false)
+		 {
+			 ptr=s.pop();
+			 flag=s1.pop();
+			 if(flag.equalsIgnoreCase("L")==true)
+			 {
+			 s.push(ptr);
+			 s1.push("R");
+			 ptr=ptr.right;
+			 }
+			 else
+			 {
+				 System.out.print(ptr.data+"  ");
+				 ptr=null;
+			 }
+			 
+		 }
+		 
+		 if(s.isEmpty()==true)
+		 {
+			 return;
+		 }		
+ }
+	 }
+	 
+ } 
+	 
+	 
+class Tree1
+{
+	public static void main(String args[])
+	{
+     @SuppressWarnings("resource")
+	Scanner sc1=new Scanner(System.in);
+     BinaryTree t=new BinaryTree();
+     int ch;
+     while(true)
+     {
+     System.out.println("");
+     System.out.println("==================MENU================");
+     System.out.println("");
+     System.out.println("1.Create Tree");
+     System.out.println("2.Inorder Traversal of Tree");
+     System.out.println("3.Preorder Traversal of Tree");
+     System.out.println("4.Postorder Traversal of Tree");
+     System.out.println("5.Recursive Inorder Traversal of Tree");
+     System.out.println("6.Recursive Preorder Traversal of Tree");
+     System.out.println("7.Recursive Postorder Traversal of Tree");
+     System.out.println("8.Exit");
+     System.out.println("");
+     System.out.println("Enter your choice : ");
+     ch=sc1.nextInt();
+     System.out.println("");
+      switch(ch)
+      {
+      case 1:
+       t.create();
+      break;
+      case 2:
+    	t.inorder();
+    	break;
+      case 3:
+    	  t.preorder();
+    	  break;
+      case 4:
+    	  t.postorder();
+    	  break;
+      case 5:
+    	  t.inorder1();
+    	  break;
+      case 6:
+    	  t.preorder1();
+    	  break;
+      case 7:
+    	  t.postorder1();
+    	  break;
+      case 8:
+    	  break;  	  
+      }
+    	 
+	}
+		
+		
+	}
+}
+ 
+ 
+ /*
+  
+ OUTPUT :
+ 
+  
+  
+==================MENU================
+
+1.Create Tree
+2.Inorder Traversal of Tree
+3.Preorder Traversal of Tree
+4.Postorder Traversal of Tree
+5.Recursive Inorder Traversal of Tree
+6.Recursive Preorder Traversal of Tree
+7.Recursive Postorder Traversal of Tree
+8.Exit
+
+Enter your choice : 
+1
+
+Enter the value for node : 
+10
+
+==================MENU================
+
+1.Create Tree
+2.Inorder Traversal of Tree
+3.Preorder Traversal of Tree
+4.Postorder Traversal of Tree
+5.Recursive Inorder Traversal of Tree
+6.Recursive Preorder Traversal of Tree
+7.Recursive Postorder Traversal of Tree
+8.Exit
+
+Enter your choice : 
+1
+
+Enter the value for node : 
+8
+10
+Enter the direction for creating the tree.Enter '1' for LEFT & '0' for RIGHT
+1
+
+==================MENU================
+
+1.Create Tree
+2.Inorder Traversal of Tree
+3.Preorder Traversal of Tree
+4.Postorder Traversal of Tree
+5.Recursive Inorder Traversal of Tree
+6.Recursive Preorder Traversal of Tree
+7.Recursive Postorder Traversal of Tree
+8.Exit
+
+Enter your choice : 
+1
+
+Enter the value for node : 
+5
+10
+Enter the direction for creating the tree.Enter '1' for LEFT & '0' for RIGHT
+1
+8
+Enter the direction for creating the tree.Enter '1' for LEFT & '0' for RIGHT
+1
+
+==================MENU================
+
+1.Create Tree
+2.Inorder Traversal of Tree
+3.Preorder Traversal of Tree
+4.Postorder Traversal of Tree
+5.Recursive Inorder Traversal of Tree
+6.Recursive Preorder Traversal of Tree
+7.Recursive Postorder Traversal of Tree
+8.Exit
+
+Enter your choice : 
+1
+
+Enter the value for node : 
+9
+10
+Enter the direction for creating the tree.Enter '1' for LEFT & '0' for RIGHT
+1
+8
+Enter the direction for creating the tree.Enter '1' for LEFT & '0' for RIGHT
+0
+
+==================MENU================
+
+1.Create Tree
+2.Inorder Traversal of Tree
+3.Preorder Traversal of Tree
+4.Postorder Traversal of Tree
+5.Recursive Inorder Traversal of Tree
+6.Recursive Preorder Traversal of Tree
+7.Recursive Postorder Traversal of Tree
+8.Exit
+
+Enter your choice : 
+1
+
+Enter the value for node : 
+20
+10
+Enter the direction for creating the tree.Enter '1' for LEFT & '0' for RIGHT
+0
+
+==================MENU================
+
+1.Create Tree
+2.Inorder Traversal of Tree
+3.Preorder Traversal of Tree
+4.Postorder Traversal of Tree
+5.Recursive Inorder Traversal of Tree
+6.Recursive Preorder Traversal of Tree
+7.Recursive Postorder Traversal of Tree
+8.Exit
+
+Enter your choice : 
+1
+
+Enter the value for node : 
+15
+10
+Enter the direction for creating the tree.Enter '1' for LEFT & '0' for RIGHT
+0
+20
+Enter the direction for creating the tree.Enter '1' for LEFT & '0' for RIGHT
+1
+
+==================MENU================
+
+1.Create Tree
+2.Inorder Traversal of Tree
+3.Preorder Traversal of Tree
+4.Postorder Traversal of Tree
+5.Recursive Inorder Traversal of Tree
+6.Recursive Preorder Traversal of Tree
+7.Recursive Postorder Traversal of Tree
+8.Exit
+
+Enter your choice : 
+1
+
+Enter the value for node : 
+30
+10
+Enter the direction for creating the tree.Enter '1' for LEFT & '0' for RIGHT
+0
+20
+Enter the direction for creating the tree.Enter '1' for LEFT & '0' for RIGHT
+0
+
+==================MENU================
+
+1.Create Tree
+2.Inorder Traversal of Tree
+3.Preorder Traversal of Tree
+4.Postorder Traversal of Tree
+5.Recursive Inorder Traversal of Tree
+6.Recursive Preorder Traversal of Tree
+7.Recursive Postorder Traversal of Tree
+8.Exit
+
+Enter your choice : 
+2
+
+5  8  9  10  15  20  30  
+==================MENU================
+
+1.Create Tree
+2.Inorder Traversal of Tree
+3.Preorder Traversal of Tree
+4.Postorder Traversal of Tree
+5.Recursive Inorder Traversal of Tree
+6.Recursive Preorder Traversal of Tree
+7.Recursive Postorder Traversal of Tree
+8.Exit
+
+Enter your choice : 
+3
+
+10  8  5  9  20  15  30  
+==================MENU================
+
+1.Create Tree
+2.Inorder Traversal of Tree
+3.Preorder Traversal of Tree
+4.Postorder Traversal of Tree
+5.Recursive Inorder Traversal of Tree
+6.Recursive Preorder Traversal of Tree
+7.Recursive Postorder Traversal of Tree
+8.Exit
+
+Enter your choice : 
+4
+
+5  9  8  15  30  20  10  
+==================MENU================
+
+1.Create Tree
+2.Inorder Traversal of Tree
+3.Preorder Traversal of Tree
+4.Postorder Traversal of Tree
+5.Recursive Inorder Traversal of Tree
+6.Recursive Preorder Traversal of Tree
+7.Recursive Postorder Traversal of Tree
+8.Exit
+
+Enter your choice : 
+5
+
+5  8  9  10  15  20  30  
+==================MENU================
+
+1.Create Tree
+2.Inorder Traversal of Tree
+3.Preorder Traversal of Tree
+4.Postorder Traversal of Tree
+5.Recursive Inorder Traversal of Tree
+6.Recursive Preorder Traversal of Tree
+7.Recursive Postorder Traversal of Tree
+8.Exit
+
+Enter your choice : 
+6
+
+10  8  5  9  20  15  30  
+==================MENU================
+
+1.Create Tree
+2.Inorder Traversal of Tree
+3.Preorder Traversal of Tree
+4.Postorder Traversal of Tree
+5.Recursive Inorder Traversal of Tree
+6.Recursive Preorder Traversal of Tree
+7.Recursive Postorder Traversal of Tree
+8.Exit
+
+Enter your choice : 
+7
+
+5  9  8  15  30  20  10  
+
+
+  
+ */
