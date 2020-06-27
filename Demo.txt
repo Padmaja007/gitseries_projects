@@ -3,7 +3,7 @@
 //
 // TITLE      : Binary Tree Traversal operations		(Recursive and Non-recursive)
 
-		Operations such as Inorder, Preorder, Postorder
+		Operations such as Inorder(Left Root Right), Preorder(Root Left Right), Postorder(Left Right Root)
 
 
 //              
