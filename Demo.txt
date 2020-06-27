@@ -1,9 +1,9 @@
 //===========================================================================================
 // 
 //
-// TITLE      : Binary Tree Traversal operations		(Recursive and Non-recursive)
+// TITLE      : Binary Tree Traversal operations (Recursive and Non-recursive)
 
-		Operations such as Inorder, Preorder, Postorder
+		Operations such as Inorder, Preorder, Postorder traversals on BT.
 
 
 //              
