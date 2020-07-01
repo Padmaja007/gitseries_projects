@@ -2,7 +2,7 @@
 
 year = 2000
 
-#Get the year as an input from user
+#Take year as input from user
 # year = int(input("Enter a year: "))
 
 if (year % 4) == 0:
